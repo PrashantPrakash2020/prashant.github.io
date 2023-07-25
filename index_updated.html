@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>miningintelligent</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Basemaps with different projections | Sample | ArcGIS Maps SDK for JavaScript 4.26</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+    <link rel="stylesheet" href="css/infomine.css" />
+    <script src="https://js.arcgis.com/4.26/"></script>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/range-slider.js"></script>
+</head>
+<body>
+  <!-- Transparent and disabled background -->
+  <div class="overlay"></div>
+  <!-- Login popup -->
+  <div class="login-popup">
+    <h2>Login</h2>
+    <div class="login-form">
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <button class="confirmlogin">Login</button>
+    </div>
+  </div>
+  <!-- jQuery library -->
+  
+  <!-- Main Header start -->
+    <div class="section-header">
+        <div class="action-menu">
+            <ul>
+                <li><a href="#"><img src="images/printing.svg"></a></li>
+                <li><a href="#"><img src="images/question-mark-2.svg"></a></li>
+                <li><a href="#"><img src="images/conversation.svg"></a></li>
+                <li><a href="#"><img src="images/menu.svg"></a></li>
+            </ul>
+        </div>
+        <div class="brand-logo">mining<strong>intelligent</strong></div> 
+        <div class="search-holder"><input type="input" class="search-box" placeholder="Quick Search"></div>
+    </div>
+    <!-- Main Header end -->
+
+    <!-- Main Sub-header start -->
+    <div class="section-sub-header">
+        <div class="back-menu"><div class="icon-back-menu">40973 Matching Properties Results</div></div>
+        <div class="sub-heading-page">MAP</div> 
+        
+        <div class="sub-action-menu">
+            <ul>
+                <li><a href="#" class="icon-embed">Embed Map</a></li>
+                <li><a href="#" class="icon-share">Share Link</a></li>
+                <li class="menu-profile"><a href="#" class="icon-profile"></a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Main Sub-header End -->
+    
+    <!-- Left popupover filter start -->
+    <div class="popupover-menu" id="popup_filtermenu">
+        <ul class="menu-option-on-map">
+            <li class="icon-placeholder" id="btn_filter"><button class="btn-filter"></button></li>
+            <li class="icon-placeholder" id="btn_search"><button class="btn-search"></button></li>
+        </ul>
+        <div class="filter-popup">
+            <div class="popup-header">
+                <div class="popup-title">Filter Search</div>
+                <div class="btn-holder"><button class="btn-close"></button></div>
+            </div>
+            <div class="tabs">
+                <ul>
+                    <li id="tab_prop" class="active">Properties</li>
+                    <li id="tab_comp">Company</li>
+                    <li id="tab_crit">Current Criteria</li>
+                </ul>
+            </div>
+            <div class="tab-container">
+                <div id="tab_prop_content" class="tab-inside active">
+                    <div class="search-main">
+                        <input id="search_property" type="search" placeholder="Property" class="input-search">
+                        <input id="search_location" type="search"  placeholder="Location" class="input-search">
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label expanded">Commodity</label>
+                        <div class="filter-expanded-view expanded">
+                            <div class="tab active" id="tab_primarycom">Primary Commodity</div>  
+                            <div class="tab" id="tab_secondarycom">Secondary Commodity</div>
+                            
+                            <div class="tab-content primary-com" id="tab_primarycom_content">
+                                <button class="btn-badge selected">Chromium</button>
+                                <button class="btn-badge">Coal</button>
+                                <button class="btn-badge">Cobalt</button>
+                                <button class="btn-badge">Copper</button>
+                                <button class="btn-badge">Diamond</button>
+                                <button class="btn-badge">Gold</button>
+                                <button class="btn-badge">Iron Ore</button>
+                                <button class="btn-badge">Lead</button>
+                                <button class="btn-badge">Maganese</button>
+                                <button class="btn-badge">Molybdenum </button>
+                                <button class="btn-badge">Nickel</button>
+                                <button class="btn-badge">Palladium</button>
+                                <button class="btn-badge">Platinum</button>
+                                <button class="btn-badge">Rare Earth </button>
+                                <button class="btn-badge">Rhodium</button>
+                                <button class="btn-badge">Silver</button>
+                                <button class="btn-badge">Tin</button>
+                                <button class="btn-badge">Tungsten</button>
+                                <button class="btn-badge">Uranium</button>
+                                <button class="btn-badge">Zinc</button>
+                            </div>
+
+                            <div class="tab-content secondary-com" id="tab_secondarycom_content">
+                                
+                                <button class="btn-badge">Platinum</button>
+                                <button class="btn-badge">Rare Earth </button>
+                                <button class="btn-badge">Rhodium</button>
+                                <button class="btn-badge">Silver</button>
+                                <button class="btn-badge">Tin</button>
+                                <button class="btn-badge">Tungsten</button>
+                                <button class="btn-badge">Uranium</button>
+                                <button class="btn-badge">Zinc</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Asset Type</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Project</button>
+                            <button class="btn-badge">Mine</button>
+                            <button class="btn-badge">Mine Complex</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Work Type</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Work Type 1</button>
+                            <button class="btn-badge">Work Type 2</button>
+                            <button class="btn-badge">Work Type 3</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Activity Status</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Activity 1</button>
+                            <button class="btn-badge">Activity 2</button>
+                            <button class="btn-badge">Activity 3</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Development Status</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Status 1</button>
+                            <button class="btn-badge">Status 2</button>
+                            <button class="btn-badge">Status 3</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="tab_comp_content" class="tab-inside">
+                    <div class="search-main">
+                        <input id="search_property" type="search" placeholder="Property" class="input-search">
+                        <input id="search_location" type="search"  placeholder="Location" class="input-search">
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Development Status</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Explore</button>
+                            <button class="btn-badge">Developer</button>
+                            <button class="btn-badge">Producer</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Stock Market</label>
+                        <div class="filter-expanded-view">
+                            
+                            <div class="range_container">
+                                <div class="slider-value-holder">
+                                    Market Cap <span class="slider-value" id="min_value">0</span> to <span class="slider-value" id="max_value">100</span> USD Million
+                                </div>
+                                <div class="sliders_control">
+                                    <input id="fromSlider" type="range" value="10" min="0" max="100"/>
+                                    <input id="toSlider" type="range" value="40" min="0" max="100"/>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="tab_crit_content" class="tab-inside">
+                    <div class="filter-section">
+                        <label class="search-label expanded">Commodity</label>
+                        <div class="filter-expanded-view expanded">
+                            <div class="tab active" id="tab_primarycom">Property Search</div>  
+                            <div class="tab" id="tab_secondarycom">Company Search</div>
+                            
+                            <div class="tab-content primary-com" id="tab_primarycom_content">
+                                <button class="btn-badge selected">Property 1</button>
+                                <button class="btn-badge">Property 2</button>
+                                <button class="btn-badge">Property 3</button>
+                            </div>
+
+                            <div class="tab-content secondary-com" id="tab_secondarycom_content">
+                                
+                                <button class="btn-badge selected">Company 1</button>
+                                <button class="btn-badge">Company 2</button>
+                                <button class="btn-badge">Company 3</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <label class="search-label">Location Name</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Location 1</button>
+                            <button class="btn-badge">Location 2</button>
+                            <button class="btn-badge">Location 3</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <label class="search-label">Primary Commodity</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Chromium</button>
+                            <button class="btn-badge">Cobalt</button>
+                            <button class="btn-badge">Cold</button>
+                            <button class="btn-badge">Nickel</button>
+                            <button class="btn-badge">Platinum</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <label class="search-label">Commodity Exposure</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Molybdenum</button>
+                            <button class="btn-badge">Palladium</button>
+                            <button class="btn-badge">ranium</button>
+                        </div>
+                    </div>
+                    <div class="filter-section">
+                        <label class="search-label">Asset Type</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Project</button>
+                            <button class="btn-badge">Mine</button>
+                            <button class="btn-badge">Mine Complex</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <label class="search-label">Work Type</label>
+                        <div class="filter-expanded-view">
+                            <button class="btn-badge selected">Work Type 1</button>
+                            <button class="btn-badge">Work Type 2</button>
+                            <button class="btn-badge">Work Type 3</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        
+            <div class="bottom-actionbar">
+                <button class="btn-sml btn-filter">Save Filters</button>
+                <span class="rightalign">
+                    <button class="btn-sml btn-clear">Clear</button>
+                    <button class="btn-sml btn-result">Update Results</button>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+    <!-- Left popupover filter end -->
+
+    <!-- map marker popup start -->
+    <div class="popup-marker">
+        <div class="popup-header">Property Name</div> <button class="btn-close"></button>
+        <div class="popup-content">
+            <div class="data-value-row">
+                <div class="data-label">Asset Type</div>
+                <div class="data-value">Project</div>
+            </div>
+            <div class="data-value-row">
+                <div class="data-label">Work Type</div>
+                <div class="data-value">Surface</div>
+            </div>
+            <div class="data-value-row">
+                <div class="data-label">Development Status</div>
+                <div class="data-value">Preliminary Economic Assessment - Stalled</div>
+            </div>
+            <div class="data-value-row">
+                <div class="data-label">Commodity Exposure</div>
+                <div class="data-value">Copper, Gold, Silver</div>
+            </div>
+            <div class="data-value-row">
+                <div class="data-label">Location</div>
+                <div class="data-value">Chile</div>
+            </div>
+            <div class="data-value-row">
+                <div class="data-label">Coordinates</div>
+                <div class="data-value">-17,683,-693</div>
+            </div>
+        </div>
+        <div class="popup-footer"><button class="btn-more-info"> More Info </button></div>
+    </div>
+    <!-- map marker popup start -->
+
+    <!-- Location Detail popup start -->
+    <div class="popupover-menu location-detail" id="popup_location">
+        
+        <div class="filter-popup">
+            <div class="popup-header">
+                <div class="popup-title">Filter Search</div>
+                <div class="btn-holder"><button class="btn-close"></button></div>
+            </div>
+            <div class="tabs">
+                <ul>
+                    <li id="tab_prop" class="active">Overview</li>
+                    <li id="tab_comp">Resource & Production</li>
+                    <li id="tab_crit">Contacts</li>
+                </ul>
+            </div>
+            <div class="tab-container">
+                <div id="tab_prop_content" class="tab-inside active">
+                    <div class="filter-section no-border">
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Key Facts</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Asset Type</label>
+                                <span>Project</span>
+                            </li>
+                            <li>
+                                <label>Work Type</label>
+                                <span>Surface</span>
+                            </li>
+                            <li>
+                                <label>Development Status</label>
+                                <span>Preliminary Economic Assessment - Stalled</span>
+                            </li>
+                            <li>
+                                <label>Primary Commodity</label>
+                                <span>Gold</span>
+                            </li>
+                            <li>
+                                <label>Commodity Exposure</label>
+                                <span>Copper, Gold, Silver</span>
+                            </li>
+                            <li>
+                                <label>Location</label>
+                                <span>Chile</span>
+                            </li>
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Operations</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Mine Technology</label>
+                                <span>Truck & Shovel</span>
+                            </li>
+                            <li>
+                                <label>Processing Technology</label>
+                                <span>Mill Heap Leach Cyanide Froth Flotation</span>
+                            </li>
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Ownership</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Newmont</label>
+                                <span>50%</span>
+                            </li>
+                            <li>
+                                <label>Barrick</label>
+                                <span>50%</span>
+                            </li>
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Options</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Gold Terra Resource</label>
+                                <span>100%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab_comp_content" class="tab-inside">
+                    <div class="filter-section no-border">
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Reserves/Resources (2022)</h4>
+                        <table>
+                            <tr>
+                                <th></th>
+                                <th align="right">P&P</th>
+                                <th align="right">M&I</th>
+                            </tr>
+                            <tr>
+                                <td>Copper (kt)</td>
+                                <td align="right">2,626</td>
+                                <td align="right">5,418</td>
+                            </tr>
+                            <tr>
+                                <td>Gold (mm ozt)</td>
+                                <td align="right">22.81</td>
+                                <td align="right">45.18</td>
+                            </tr>
+                            <tr>
+                                <td>Silver (mm ozt)</td>
+                                <td align="right">57.65</td>
+                                <td align="right">106.79</td>
+                            </tr>
+                        </table>
+                        <h4 class="list-table-heading">Production (2022)</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Copper (kt)</label>
+                                <span>126.2</span>
+                            </li>
+                            <li>
+                                <label>Lead (kt)</label>
+                                <span>26.1</span>
+                            </li>
+                            <li>
+                                <label>Zinc (kt)</label>
+                                <span>65.2</span>
+                            </li>
+                           
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Operations</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Mine Technology</label>
+                                <span>Truck & Shovel</span>
+                            </li>
+                            <li>
+                                <label>Processing Technology</label>
+                                <span>Mill Heap Leach Cyanide Froth Flotation</span>
+                            </li>
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Ownership</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Newmont</label>
+                                <span>50%</span>
+                            </li>
+                            <li>
+                                <label>Barrick</label>
+                                <span>50%</span>
+                            </li>
+                        </ul>
+                        <!-- listing -->
+                        <h4 class="list-table-heading">Options</h4>
+                        <ul class="table-list">
+                            <li>
+                                <label>Gold Terra Resource</label>
+                                <span>100%</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="tab_crit_content" class="tab-inside">
+                    <h4 class="list-table-heading">HQ of Owner</h4>
+                    <p>161 Bay Street, Suite 3700, Po Box 212 Toronto, Ontario M5J 2S1 Canada</p>
+                        <ul class="table-list">
+                            <li>
+                                <label>Phone</label>
+                                <span>+1 416 861-9911</span>
+                            </li>
+                            <li>
+                                <label>Toll Free</label>
+                                <span>1-800-720-7415</span>
+                            </li>
+                            <li>
+                                <label>Fax </label>
+                                <span>+1 416 861-2492</span>
+                            </li>
+                            <li>
+                                <label>Email </label>
+                                <span>investor@barrick.com</span>
+                            </li>
+                            <li>
+                                <label>Website </label>
+                                <span>www.barrick.com</span>
+                            </li>
+                           
+                        </ul>
+
+                        <h4 class="list-table-heading">Mine Personnel</h4>
+                            <ul class="table-list">
+                                <li>
+                                    <label class="tex-bold">Name</label>
+                                    <span>Allan Baus</span>
+                                </li>
+                                <li>
+                                    <label class="tex-bold">Title</label>
+                                    <span>Construction manager</span>
+                                </li>
+                                <li>
+                                    <label class="tex-bold">LinkedIn </label>
+                                    <span></span>
+                                </li>
+                                <li>
+                                    <label class="tex-bold">Reference Date </label>
+                                    <span>Apr 24, 2023</span>
+                                </li>
+                                <li>
+                                    <label class="tex-bold">Website </label>
+                                    <span>www.barrick.com</span>
+                                </li>
+                               
+                            </ul>
+
+
+                        
+                        <ul class="table-list">
+                            <li>
+                                <label>Name</label>
+                                <span>Allan Baus</span>
+                            </li>
+                            <li>
+                                <label>Title</label>
+                                <span>Construction manager</span>
+                            </li>
+                            <li>
+                                <label>LinkedIn </label>
+                                <span></span>
+                            </li>
+                            <li>
+                                <label>Reference Date </label>
+                                <span>Apr 24, 2023</span>
+                            </li>
+                            <li>
+                                <label>Website </label>
+                                <span>www.barrick.com</span>
+                            </li>
+                           
+                        </ul>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- Location Detail popup end -->
+
+    <!-- Map holder start -->
+
+    <div id="viewDiv"></div>
+
+    <!-- Map holder end -->
+    
+        <div id="searchDiv" class="esri-widget"></div>
+        <div id="srDiv" class="esri-widget"></div>
+        <div id="filters" class="eris-widget">
+            <label for="Asset_Type">Asset_Type:</label>
+            <select id="Asset_Type" name="Asset_Type" class="filter-item"">
+                <option>All</option>
+                <option>Mine</option>
+                <option>Project</option>
+                <option>Mine Complex</option>
+            </select>
+            <label for=" Work_Type">Work_Type:</label>
+                <select id="Work_Type" name="Work_Type" class="filter-item"">
+                <option>All</option>
+                <option>Underground</option>
+                <option>Surface</option>
+                <option>Tailings</option>
+                <option>Open-Pit</option>
+                <option>Open-Pit/Underground</option>
+                <option>Placer</option>
+                <option>In-Situ</option>
+                <option>Seabed</option>
+            </select>
+            <label for=" Development_Status">Development_Status:</label>
+                    <select id="Development_Status" name="Development_Status" class="filter-item"">
+                <option>All</option>
+                <option>Production</option>
+                <option>Advanced Exploration</option>
+                <option>Preliminary Economic Assessment</option>
+                <option>Feasibility</option>
+                <option>Scoping</option>
+                <option>Prefeasibility</option>
+            </select>
+            <label for=" Primary_Commodity">Primary_Commodity:</label>
+                        <select id="Primary_Commodity" name="Primary_Commodity" class="filter-item"">
+                <option>All</option>
+                <option>Gold</option>
+                <option>Copper</option>
+                <option>Silver,Copper</option>
+                <option>Silver</option>
+                <option>Zinc</option>
+                <option>Nickel</option>
+                <option>Zinc,Copper</option>
+                <option>Zinc,Silver</option>
+                <option>Copper,Gold</option>
+                <option>Gold,Silver</option>
+                <option>Zinc,Gold</option>
+                <option>Molybdenum</option>
+                <option>Copper,Cobalt</option>
+                <option>Palladium</option>
+                <option>Copper,Zinc</option>
+                <option>Tin</option>
+                <option>Gold,Copper</option>
+                <option>Silver,Gold</option>
+                <option>Silver,Zinc</option>
+                <option>Lead</option>
+                <option>Lead,Silver</option>
+                <option>Rhodium</option>
+                <option>Palladium,Platinum</option>
+                <option>Rhodium,Palladium</option>
+                <option>Gold,Zinc</option>
+                <option>Copper,Silver</option>
+                <option>Nickel,Palladium</option>
+                <option>Platinum,Rhodium</option>
+                <option>Rhodium,Platinum</option>
+                <option>Uranium</option>
+                <option>Copper,Nickel</option>
+                <option>Cobalt</option>
+                <option>Lithium</option>
+                <option>Silver,Tin</option>
+                <option>Molybdenum,Gold</option>
+                <option>Palladium,Nickel</option>
+                <option>Iron Ore</option>
+                <option>Platinum</option>
+                <option>Manganese</option>
+                <option>Cobalt,Copper</option>
+                <option>Graphite</option>
+                <option>Silver,Lead</option>
+                <option>Tungsten</option>
+                <option>Lead,Zinc</option>
+                <option>Zinc,Lead</option>
+                <option>Molybdenum,Nickel</option>
+            </select>
+            <label for=" Commodity_Exposure">Commodity_Exposure:</label>
+                            <select id="Commodity_Exposure" name="Commodity_Exposure" class="filter-item"">
+                <option>All</option>
+                <option>Copper, Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Gold, Silver</option>
+                <option>Gold</option>
+                <option>Copper, Gold</option>
+                <option>Gold, Silver</option>
+                <option>Copper, Gold, Molybdenum, Silver</option>
+                <option>Copper, Gold, Molybdenum, Silver, Zinc</option>
+                <option>Cobalt, Copper, Lead, Silver, Zinc</option>
+                <option>Copper, Gold, Silver, Zinc</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum, Silver, Zinc</option>
+                <option>Copper, Lead, Silver, Zinc</option>
+                <option>Cobalt, Copper, Manganese, Zinc</option>
+                <option>Gold, Silver, Zinc</option>
+                <option>Cobalt, Copper, Gold</option>
+                <option>Copper</option>
+                <option>Copper, Gold, Molybdenum</option>
+                <option>Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Silver</option>
+                <option>Cobalt, Copper, Nickel, Palladium, Platinum</option>
+                <option>Copper, Indium, Silver, Zinc, Magnetite</option>
+                <option>Copper, Molybdenum, Silver</option>
+                <option>Copper, Gold, Molybdenum, Rhenium</option>
+                <option>Copper, Molybdenum</option>
+                <option>Gold, Uranium</option>
+                <option>Gold, Rare Earth, Rubidium, Arsenic</option>
+                <option>Gold, Lead, Molybdenum, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Copper, Gold, Iron Ore, Silver</option>
+                <option>Cadmium, Copper, Lead, Silver, Zinc</option>
+                <option>Cobalt, Copper</option>
+                <option>Copper, Zinc</option>
+                <option>Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Silver, Ruthenium</option>
+                <option>Cobalt, Copper, Gold, Silver, Zinc</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Silver</option>
+                <option>Bismuth, Copper, Indium, Molybdenum, Tin, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Bismuth, Cobalt, Copper, Gold</option>
+                <option>Gold, Lead, Silver</option>
+                <option>Gold, Tellurium</option>
+                <option>Copper, Gold, Lead, Molybdenum, Rare Earth, Silver, Zinc</option>
+                <option>Copper, Gold, Tungsten</option>
+                <option>Copper, Gold, Molybdenum, Rhenium, Silver</option>
+                <option>Copper, Gold, Lead, Molybdenum, Silver, Zinc</option>
+                <option>Gold, Palladium, Platinum</option>
+                <option>Copper, Tin, Zinc</option>
+                <option>Cobalt, Copper, Nickel</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum</option>
+                <option>Cobalt, Copper, Gold, Molybdenum</option>
+                <option>Copper, Lead, Molybdenum, Silver, Zinc</option>
+                <option>Copper, Lead, Silver</option>
+                <option>Copper, Gold, Lead, Manganese, Silver, Zinc</option>
+                <option>Copper, Gold, Silver, Zinc, Tellurium</option>
+                <option>Cobalt, Copper, Gold, Iridium, Nickel, Osmium, Palladium, Platinum, Rhodium, Silver, Ruthenium, Chromium</option>
+                <option>Copper, Gold, Silver, Uranium</option>
+                <option>Copper, Iron Ore, Magnetite</option>
+                <option>Copper, Gold, Silver, Sulphur, Zinc, Pyrite</option>
+                <option>Gold, Palladium, Platinum, Rhodium</option>
+                <option>Cobalt, Copper, Gold, Iron Ore, Silver, Zinc</option>
+                <option>Cobalt, Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Silver, Ruthenium</option>
+                <option>Copper, Gold, Silver, Sulphur, Arsenic</option>
+                <option>Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Ruthenium</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum, Silver</option>
+                <option>Copper, Manganese, Silver, Zinc</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Rhodium, Silver</option>
+                <option>Cobalt, Copper, Iron Ore, Lithium, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Chromium, Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Antimony, Gold</option>
+                <option>Cobalt, Copper, Gold, Uranium</option>
+                <option>Copper, Tin</option>
+                <option>Antimony, Copper, Gold, Silver, Arsenic</option>
+                <option>Cobalt, Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Ruthenium</option>
+                <option>Cobalt, Copper, Silver</option>
+                <option>Barite, Copper, Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Molybdenum, Silver, Zinc</option>
+                <option>Chromium, Copper, Gold, Nickel, Platinum, Silver, Zinc</option>
+                <option>Cobalt, Copper, Nickel, Zinc, Iron - Total</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Chromium, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Ruthenium</option>
+                <option>Cobalt, Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Ruthenium, Chromium</option>
+                <option>Copper, Nickel, Uranium, Arsenic</option>
+                <option>Antimony, Bismuth, Copper, Gold, Lead, Silver, Zinc, Arsenic</option>
+                <option>Cobalt, Copper, Gold, Silver, Uranium</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Iron - Total</option>
+                <option>Cobalt, Copper, Gold, Lead, Silver, Zinc</option>
+                <option>Cobalt, Copper, Gold, Iron Ore, Silver, Magnetite</option>
+                <option>Chromium, Copper, Gold, Nickel, Palladium, Platinum, Silver, Vanadium</option>
+                <option>Copper, Gallium, Indium, Lead, Silver, Zinc</option>
+                <option>Gold, Silver, Tungsten</option>
+                <option>Cobalt, Copper, Gold, Molybdenum, Nickel, Uranium</option>
+                <option>Cobalt, Copper, Gold, Arsenic</option>
+                <option>Antimony, Gold, Silver</option>
+                <option>Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Silver, Ruthenium, Chromium</option>
+                <option>Copper, Gold, Iron Ore, Lead, Silver, Sulphur, Zinc, Arsenic</option>
+                <option>Copper, Gold, Uranium, Vanadium</option>
+                <option>Copper, Molybdenum, Rhenium, Silver, Tungsten, Tungsten Oxide</option>
+                <option>Copper, Gold, Silver, Zinc, Iron - Total</option>
+                <option>Cobalt, Copper, Iron Ore, Nickel, Arsenic</option>
+                <option>Cobalt, Copper, Lithium, Nickel</option>
+                <option>Copper, Nickel</option>
+                <option>Copper, Gold, Iron Ore, Lead, Silver, Zinc</option>
+                <option>Copper, Gold, Platinum, Silver</option>
+                <option>Cobalt, Gold</option>
+                <option>Gold, Lithium</option>
+                <option>Gold, Nickel</option>
+                <option>Cobalt, Copper, Gold, Silver</option>
+                <option>Copper, Gold, Lead, Silver, Zinc, Arsenic</option>
+                <option>Bismuth, Copper, Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Gold, Lead, Silver, Zinc, Arsenic, Iron - Total</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum, Rare Earth</option>
+                <option>Barite, Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Silver, Sulphur, Zinc</option>
+                <option>Cobalt, Copper, Sulphur, Zinc</option>
+                <option>Copper, Lead, Silver, Tin, Zinc</option>
+                <option>Cobalt, Copper, Gold, Nickel, Silver, Arsenic</option>
+                <option>Cobalt, Copper, Nickel, Palladium, Platinum, Rhodium, Sulphur</option>
+                <option>Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium, Ruthenium, Chromium</option>
+                <option>Cobalt, Copper, Lead, Silver, Zinc, Pyrite</option>
+                <option>Copper, Gold, Iron Ore</option>
+                <option>Copper, Iron Ore, Lead, Sulphur, Tin, Zinc</option>
+                <option>Bismuth, Cobalt, Copper, Gold, Lead, Silver, Zinc</option>
+                <option>Copper, Silver, Zinc</option>
+                <option>Cobalt, Copper, Lead, Nickel, Zinc</option>
+                <option>Gold, Molybdenum, Silver, Tungsten, Tungsten Oxide</option>
+                <option>Copper, Gold, Molybdenum, Zinc</option>
+                <option>Copper, Molybdenum, Nickel, Uranium, Vanadium, Zinc</option>
+                <option>Antimony, Copper, Lead, Silver</option>
+                <option>Copper, Gold, Indium, Lead, Silver, Tin, Zinc</option>
+                <option>Cobalt, Copper, Gold, Palladium, Uranium</option>
+                <option>Gold, Iron Ore</option>
+                <option>Gold, Iron Ore, Lead, Silver, Zinc, Iron - Total</option>
+                <option>Copper, Gold, Zinc</option>
+                <option>Gold, Molybdenum</option>
+                <option>Copper, Gold, Nickel, Palladium, Platinum, Rhodium, Chromium</option>
+                <option>Copper, Silver, Uranium</option>
+                <option>Cobalt, Copper, Gold, Nickel, Silver, Zinc</option>
+                <option>Cobalt, Copper, Gold, Iridium, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Copper, Nickel, Platinum</option>
+                <option>Copper, Gold, Lead, Zinc</option>
+                <option>Copper, Gold, Silver, Sulphur, Pyrite</option>
+                <option>Gold, Zinc, Ruthenium, Tellurium</option>
+                <option>Copper, Indium, Tin, Zinc</option>
+                <option>Gold, Zinc</option>
+                <option>Cobalt, Copper, Nickel, Uranium, Zinc</option>
+                <option>Copper, Gold, Arsenic</option>
+                <option>Copper, Lead, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Gold, Manganese</option>
+                <option>Copper, Gold, Lead, Silver, Uranium, Zinc</option>
+                <option>Cobalt, Copper, Manganese, Nickel</option>
+                <option>Copper, Gold, Lead, Silver, Zinc, Tellurium</option>
+                <option>Copper, Indium, Silver, Tin</option>
+                <option>Bismuth, Cobalt, Copper, Silver, Tungsten Oxide</option>
+                <option>Gold, Graphite</option>
+                <option>Copper, Gold, Molybdenum, Silver, Arsenic</option>
+                <option>Copper, Gold, Silver, Magnetite</option>
+                <option>Copper, Lead, Silver, Tin, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Copper, Silver, Tin</option>
+                <option>Copper, Fluorite, Tin, Tungsten, Tungsten Oxide</option>
+                <option>Antimony, Gold, Lead, Silver</option>
+                <option>Copper, Iron Ore</option>
+                <option>Cobalt, Copper, Gold, Molybdenum, Silver</option>
+                <option>Copper, Silver, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Copper, Tin, Tungsten</option>
+                <option>Gold, Tungsten</option>
+                <option>Bismuth, Copper, Gold, Lead, Molybdenum, Silver, Zinc</option>
+                <option>Copper, Gold, Lead, Silver</option>
+                <option>Copper, Gold, Silver, Iron - Total</option>
+                <option>Copper, Gold, Palladium, Platinum</option>
+                <option>Cobalt, Copper, Gold, Lithium, Nickel, Palladium, Platinum</option>
+                <option>Cobalt, Copper, Zinc</option>
+                <option>Gold, Rhodium, Zinc</option>
+                <option>Gold, Silver, Uranium</option>
+                <option>Copper, Nickel, Palladium, Platinum, Rhodium</option>
+                <option>Copper, Gold, Lead, Silver, Tin, Zinc</option>
+                <option>Bismuth, Copper, Gold, Lead, Molybdenum, Silver, Tungsten, Zinc, Tungsten Oxide</option>
+                <option>Copper, Molybdenum, Nickel, Vanadium, Zinc</option>
+                <option>Cobalt, Copper, Nickel, Palladium, Platinum, Sulphur</option>
+                <option>Cobalt, Copper, Gold, Nickel, Palladium, Platinum, Vanadium, Ruthenium</option>
+                <option>Cobalt, Copper, Gold, Nickel, Silver</option>
+                <option>Cobalt, Gold, Nickel</option>
+                <option>Copper, Gold, Silica</option>
+                <option>Copper, Gold, Lead, Silver, Sulphur, Zinc, Iron - Total</option>
+            </select>
+        </div>
+    
+        <div class="section-footer">
+            <div class="footer-inside">
+                <div class="btn-sticky">
+                    <button class="btn-layer-collapsed"></button>
+                    <button class="btn-layer-close">Layers </button>
+                </div>
+                <div class="footer-content">
+                    <div class="footer-heading">
+                        <label class="footer-heading-label">Property Layer</label> 
+                        <label class="switch">
+                            <input type="checkbox" id="togBtn"> 
+                            <div class="slider round"></div>
+                        </label>
+
+                        <button class="btn-clear">Clear</button> 
+                    </div>
+                    <ul class="footer-list-items">
+                        <li>
+                            <div><img src="images/icon-pros.svg"></img></div>
+                            <label>Prospects</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-map.svg"></img></div>
+                            <label>Exploration</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-exp.svg"></img></div>
+                            <label>Advanced Exploration</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-pref.svg"></img></div>
+                            <label>Prefeasibility</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-preliminary.svg"></img></div>
+                            <label>Preliminary Economic Assessme</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-scoping.svg"></img></div>
+                            <label>Scoping</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-feas.svg"></img></div>
+                            <label>Feasibility</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-permit.svg"></img></div>
+                            <label>Permitting</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-cons.svg"></img></div>
+                            <label>Construction</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-prod.svg"></img></div>
+                            <label>Production</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-susp.svg"></img></div>
+                            <label>Suspension</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-decom.svg"></img></div>
+                            <label>Decommissioning</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-care.svg"></img></div>
+                            <label>Care and Maintenance</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-aban.svg"></img></div>
+                            <label>Abandoned</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-closed.svg"></img></div>
+                            <label>Closed</label>
+                        </li>
+                        <li>
+                            <div><img src="images/icon-process.svg"></img></div>
+                            <label>Processing Facility</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+    
+  <script src=" js/infomine.js"></script>
+  <script>
+    $(document).ready(function() {
+	$(".menu-option-on-map").hide();
+	$(".btn-sticky").hide();
+
+	 $(".btn-close").click(function(){
+            $(this).closest(".filter-popup").hide();
+        });
+        $(".btn-filter").click(function(){
+            $(this).closest('#popup_filtermenu').find(".filter-popup").show();
+        });
+        
+        var heightMapContainer = $('#viewDiv').height();
+        $('#popup_filtermenu .filter-popup').height((heightMapContainer - 30)+'px');
+        $('#popup_filtermenu .tab-inside').height((heightMapContainer - 180)+'px');
+
+        $('#popup_location .filter-popup').height((heightMapContainer - 60)+'px');
+        $('#popup_location .tab-inside').height((heightMapContainer - 180)+'px');
+        
+        $('#popup_filtermenu .tabs li').click(function(){
+            var tabId = $(this).attr('id');
+            console.log(tabId);
+            $(this).closest('.tabs').find('li').removeClass('active');
+            $(this).addClass('active');
+            $(this).closest('.filter-popup').find('.tab-inside').hide();
+            $(this).closest('#popup_filtermenu').find('#'+tabId+'_content').show();
+        });
+        $('#popup_location .tabs li').click(function(){
+            var tabId = $(this).attr('id');
+            console.log(tabId);
+            $(this).closest('.tabs').find('li').removeClass('active');
+            $(this).addClass('active');
+            $(this).closest('.filter-popup').find('.tab-inside').hide();
+            $(this).closest('#popup_location').find('#'+tabId+'_content').show();
+        });
+
+        $('.filter-expanded-view').find('.tab').click(function(){
+            var thisTabId = $(this).attr('id');
+            $(this).closest('.filter-expanded-view').find('.tab').removeClass('active');
+            $(this).addClass('active');
+            $(this).closest('.filter-expanded-view').find('.tab-content').hide();
+            $(this).closest('.filter-expanded-view').find('#'+thisTabId+'_content').show();
+            console.log(thisTabId);
+        });
+
+        $('.btn-badge').click(function(){
+            $(this).toggleClass('selected');
+        });
+        $('.search-label').click(function(){
+            $(this).toggleClass('expanded');
+            $(this).closest('.filter-section').find('.filter-expanded-view').toggleClass('expanded');
+        });
+        $('#viewDiv').click(function(){
+            $('.popup-marker').show();    
+        })
+        $('.popup-marker .btn-close').click(function(){
+            $(this).closest('.popup-marker').hide();
+        });
+        $('.btn-more-info').click(function(){
+            $('.location-detail .filter-popup').show();
+        });
+
+        $('.btn-layer-collapsed').click(function(){
+            $(this).hide();
+            $(this).closest('.btn-sticky').find('.btn-layer-close').show();
+            $(this).closest('.footer-inside').find('.footer-content').show(); 
+        });
+
+        $('.btn-layer-close').click(function(){
+            $(this).hide();
+            $(this).closest('.btn-sticky').find('.btn-layer-collapsed').show();
+            $(this).closest('.footer-inside').find('.footer-content').hide(); 
+        });
+	
+	
+        $(".overlay").fadeIn(500);
+        $(".login-popup").fadeIn(500);
+
+      $(".confirmlogin").click(function() {
+        $(".overlay").fadeOut(1000);
+        $(".login-popup").fadeOut(1000);
+		setTimeout(function(){
+		$(".menu-option-on-map").show();
+	    $(".btn-sticky").show();
+		},1500);
+		
+      });
+    });
+  </script>
+</body>
+</html>
